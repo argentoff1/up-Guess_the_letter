@@ -2,29 +2,62 @@
 #include <stdlib.h>
 #include <locale.h>
 
-int binarySearch() {
-    int low, high, middle;
-    low = 0;
-    high = n - 1;
-    while (low <= high)
+// Логика игры
+void guessTheLetter(char letters[], char goal) {
+    setlocale(LC_ALL, "Russian");
+
+    printf("Попробуйте угадать букву от a до z");
+
+    int steps = 0; // Переменная для записи количества ходов
+
+    char inputChar;
+    printf("Введите ваш вариант буквы: ");
+    inputChar = scanf("%c", &inputChar);
+
+    while(1) 
     {
-        middle = (low + high) / 2;
-        if (a < mass[middle])
-            high = middle - 1;
-        else if (a > mass[middle])
-            low = middle + 1;
-        else
-            return middle;
+        if(inputChar > goal)
+        {
+            printf("Загаданная буква находится левее");
+            steps++;
+        }
+        else if(inputChar < goal)
+        {
+            printf("Загаданная буква находится правее");
+            steps++;
+        }
+        else if(inputChar == goal) 
+        {
+            printf("Угадал");
+            steps++;
+        }
     }
+}
+
+// Функция для регистрации пользователя
+string registerUser() 
+{
+    setlocale(LC_ALL, "Russian");
+
+    string username;
+    printf("Введите ваше имя для записи в таблицу рекордов: ");
+    username = scanf("%s", username)
+    return username;
+}
+
+// Функция для записи пользователя в таблицу рекордов
+void writeInFile() 
+{
+
 }
 
 int main()
 {
-    setlocale(LC_ALL, "Russian");
     char letters[26] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
-    printf("���� '������ �����'");
-    printf("%s", letters[rand() % 27]);
+    char goal = letters[rand() % 27];
 
-    return -1;
+    registerUser();
+    guessTheLetter(letters, goal);
+    writeInFile();
     return 0;
 }
