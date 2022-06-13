@@ -2,17 +2,29 @@
 #include <stdlib.h>
 #include <locale.h>
 
+int main()
+{
+    char letters[26] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+    char goal = letters[rand() % 27];
+
+    registerUser();
+    guessTheLetter(letters, goal);
+    writeInFile(registerUser());
+    
+    return 0;
+}
+
 // Логика игры
 void guessTheLetter(char letters[], char goal) {
     setlocale(LC_ALL, "Russian");
 
-    printf("Попробуйте угадать букву от a до z");
-
     int steps = 0; // Переменная для записи количества ходов
+    char inputChar;
+
+    printf("Попробуйте угадать букву от a до z");
 
     while(1) 
     {
-        char inputChar;
         printf("Введите ваш вариант буквы: ");
         inputChar = scanf("%c", &inputChar);
 
@@ -54,16 +66,4 @@ string registerUser()
 void writeInFile(string username) 
 {
 
-}
-
-int main()
-{
-    char letters[26] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
-    char goal = letters[rand() % 27];
-
-    registerUser();
-    guessTheLetter(letters, goal);
-    writeInFile(registerUser());
-    
-    return 0;
 }
