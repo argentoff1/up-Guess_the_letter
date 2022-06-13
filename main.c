@@ -10,27 +10,32 @@ void guessTheLetter(char letters[], char goal) {
 
     int steps = 0; // Переменная для записи количества ходов
 
-    char inputChar;
-    printf("Введите ваш вариант буквы: ");
-    inputChar = scanf("%c", &inputChar);
-
     while(1) 
     {
-        if(inputChar > goal)
+        char inputChar;
+        printf("Введите ваш вариант буквы: ");
+        inputChar = scanf("%c", &inputChar);
+
+        while(1) 
         {
-            printf("Загаданная буква находится левее");
-            steps++;
+            if(inputChar > goal)
+            {
+                printf("Загаданная буква находится левее");
+                steps++;
+            }
+            else if(inputChar < goal)
+            {
+                printf("Загаданная буква находится правее");
+                steps++;
+            }
+            else if(inputChar == goal) 
+            {
+                printf("Угадал");
+                steps++;
+                break;
+            }
         }
-        else if(inputChar < goal)
-        {
-            printf("Загаданная буква находится правее");
-            steps++;
-        }
-        else if(inputChar == goal) 
-        {
-            printf("Угадал");
-            steps++;
-        }
+        break;
     }
 }
 
@@ -46,7 +51,7 @@ string registerUser()
 }
 
 // Функция для записи пользователя в таблицу рекордов
-void writeInFile() 
+void writeInFile(string username) 
 {
 
 }
@@ -58,6 +63,7 @@ int main()
 
     registerUser();
     guessTheLetter(letters, goal);
-    writeInFile();
+    writeInFile(registerUser());
+    
     return 0;
 }
