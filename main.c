@@ -5,30 +5,30 @@
 int main()
 {
     char letters[26] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
-    char goal = letters[rand() % 27];
+    char goal[27] = letters[rand() % 27];
 
     registerUser();
     guessTheLetter(letters, goal);
     writeInFile(registerUser());
-    
+
     return 0;
 }
 
 // Логика игры
-void guessTheLetter(char letters[], char goal) {
+void guessTheLetter(char letters[26], char goal[26]) {
     setlocale(LC_ALL, "Russian");
 
     int steps = 0; // Переменная для записи количества ходов
-    char inputChar;
+    char inputChar[1];
 
     printf("Попробуйте угадать букву от a до z");
 
-    while(1) 
+    while(1)
     {
         printf("Введите ваш вариант буквы: ");
-        inputChar = scanf("%c", &inputChar);
+        inputChar = scanf("%s", &inputChar);
 
-        while(1) 
+        while(1)
         {
             if(inputChar > goal)
             {
@@ -40,30 +40,34 @@ void guessTheLetter(char letters[], char goal) {
                 printf("Загаданная буква находится правее");
                 steps++;
             }
-            else if(inputChar == goal) 
+            else if(inputChar == goal)
             {
                 printf("Угадал");
                 steps++;
                 break;
             }
         }
-        break;
     }
 }
 
 // Функция для регистрации пользователя
-string registerUser() 
+char registerUser()
 {
     setlocale(LC_ALL, "Russian");
 
-    string username;
+    char username[20];
     printf("Введите ваше имя для записи в таблицу рекордов: ");
-    username = scanf("%s", username)
+    username = scanf("%s", username);
+
     return username;
 }
 
 // Функция для записи пользователя в таблицу рекордов
-void writeInFile(string username) 
+void writeInFile(char username[20])
 {
+    FILE *f;
+    f = fopen("test.txt", "w");
+    fprintf(f, "%s", username);
 
+    fclose(f);
 }
